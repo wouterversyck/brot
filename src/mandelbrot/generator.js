@@ -1,3 +1,4 @@
+import { getTerminalSize } from "../drawer.js";
 
 const MAX_ITERATION = 80
 function mandelbrot(c) {
@@ -19,19 +20,19 @@ function mandelbrot(c) {
 
 const REAL_SET = { start: -2, end: 1 }
 const IMAGINARY_SET = { start: -1, end: 1 }
-const HEIGHT = 80;
-const WIDTH = 50;
+const HEIGHT = getTerminalSize().rows;
+const WIDTH = getTerminalSize().columns;
 const nrOfColors = 3
 
 
 export function generate() {
-    const result = new Array(WIDTH);
-    for (let i = 0; i < WIDTH; i++) {
-        result[i] = new Array(HEIGHT);
-        for (let j = 0; j < HEIGHT; j++) {
+    const result = new Array(HEIGHT);
+    for (let i = 0; i < HEIGHT; i++) {
+        result[i] = new Array(WIDTH);
+        for (let j = 0; j < WIDTH; j++) {
             const complex = {
-                x: REAL_SET.start + (i / WIDTH) * (REAL_SET.end - REAL_SET.start),
-                y: IMAGINARY_SET.start + (j / HEIGHT) * (IMAGINARY_SET.end - IMAGINARY_SET.start)
+                x: REAL_SET.start + (i / HEIGHT) * (REAL_SET.end - REAL_SET.start),
+                y: IMAGINARY_SET.start + (j / WIDTH) * (IMAGINARY_SET.end - IMAGINARY_SET.start)
             }
 
             const [m, isMandelbrotSet] = mandelbrot(complex);

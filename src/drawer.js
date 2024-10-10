@@ -1,4 +1,5 @@
 import chalk from "chalk";
+import terminalSize from "terminal-size";
 
 // Use bottom half of char symbol to render 2 pixels per char
 const char = '▄';
@@ -25,6 +26,20 @@ export const colors = {
         char: chalk.white,
     }
 }
+
+export const getTerminalSize = () => {
+    let size = terminalSize();
+
+    let rowsDoubleDrawn = (size.rows * 2) - 4;
+
+    if (rowsDoubleDrawn % 2 !== 0) {
+        rowsDoubleDrawn = rowsDoubleDrawn - 1;
+    }
+    return {
+        columns: size.columns,
+        rows: rowsDoubleDrawn,
+    }
+};
 
 function validate (img) {
     if (img.length % 2 !== 0) {

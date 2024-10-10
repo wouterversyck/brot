@@ -1,3 +1,5 @@
+import { getTerminalSize } from "../drawer.js";
+
 const createGrid = (rows, cols) => {
     const grid = new Array(rows);
     for (let i = 0; i < rows; i++) {
@@ -64,7 +66,11 @@ const randomize = (grid) => {
     }
 }
 
-let actualGrid = createGrid(116, 205);
+const terminalSize = getTerminalSize();
+if (terminalSize.rows % 2 !== 0) {
+    terminalSize.rows = terminalSize.rows - 1;
+}
+let actualGrid = createGrid(terminalSize.rows, terminalSize.columns);
 randomize(actualGrid);
 export const generate = () => {
     actualGrid = nextGeneration(actualGrid);
