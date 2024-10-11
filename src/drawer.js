@@ -30,11 +30,9 @@ export const colors = {
 export const getTerminalSize = () => {
     let size = terminalSize();
 
+    // We draw 2 pixels per row so multiply by 2, this does not 100% fit for now so we subtract by some pixels
+    // For now rows need to be an even number (check validate), so by multiplying by 2 and subtracting by an even number the rows will always be even
     let rowsDoubleDrawn = (size.rows * 2) - 4;
-
-    if (rowsDoubleDrawn % 2 !== 0) {
-        rowsDoubleDrawn = rowsDoubleDrawn - 1;
-    }
     return {
         columns: size.columns,
         rows: rowsDoubleDrawn,
